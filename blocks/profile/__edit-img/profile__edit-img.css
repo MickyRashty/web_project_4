@@ -1,3 +1,10 @@
 .profile__edit-img {
     display: flex;
 }
+
+@media screen and (max-width: 500px) {
+    .profile__edit-img {
+        margin-top: 26px;
+        max-height: 22px;
+    }
+}

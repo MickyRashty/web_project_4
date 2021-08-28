@@ -4,3 +4,16 @@
     color: #FFFFFF;
     margin: 16px 0 0;
 }
+
+@media screen and (max-width: 777px) {
+    .profile__info-about {
+        font-size: 14px;
+        margin-top: 14px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profile__info-about {
+        text-align: center;
+    }
+}

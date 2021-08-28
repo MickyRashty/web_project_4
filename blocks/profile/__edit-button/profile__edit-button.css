@@ -6,3 +6,21 @@
     margin: 15px 0 0 18px;
     align-self: center;
 }
+
+@media screen and (max-width: 920px) {
+    .profile__edit-button {
+        margin-top: 3px;
+    }
+}
+
+@media screen and (max-width: 777px) {
+    .profile__edit-button {
+        padding: 4px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .profile__edit-button {
+        margin: 0 0 0 10px;
+    }
+}
