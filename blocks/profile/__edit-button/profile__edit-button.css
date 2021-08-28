@@ -1,0 +1,8 @@
+.profile__edit-button {
+    border: solid 1px #fff;
+    max-width: 24px;
+    max-height: 24px;
+    padding: 6px;
+    margin: 15px 0 0 18px;
+    align-self: center;
+}
