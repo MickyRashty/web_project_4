@@ -1,0 +1,19 @@
+.edit-layer__close-button {
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    max-height: 40px;
+    transition: opacity 1s linear;
+}
+
+.edit-layer__close-button:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 500px) {
+    .edit-layer__close-button {
+        top: -50px;
+        right: 0;
+    }
+    
+}

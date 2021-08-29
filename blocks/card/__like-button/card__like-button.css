@@ -1,10 +1,10 @@
 .card__like-button {
     padding: 30px 18px 30px 0;
     align-self: center;
-    /* opacity: 1; */
     transition: opacity 1s linear;
 }
 
 .card__like-button:hover {
     opacity: 0.5;
+    cursor: pointer;
 }
