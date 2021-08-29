@@ -5,6 +5,12 @@
     padding: 6px;
     margin: 15px 0 0 18px;
     align-self: center;
+    transition: opacity 1s linear;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 920px) {
