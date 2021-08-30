@@ -1,12 +1,17 @@
 .profile__add-button {
     border: solid 2px #fff;
-    padding: 13px 63px;
+    background: url(../../../images/add-button.svg) no-repeat;
+    background-position: center;
+    align-self: center;
+    min-width: 150px;
+    min-height: 50px;
     margin-left: 165px;
+    padding: 0;
     transition: opacity 1s linear;
 }
 
 .profile__add-button:hover {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: pointer;
 }
 
@@ -18,15 +23,15 @@
 
 @media screen and (max-width: 600px) {
     .profile__add-button {
-        padding: 10px 45px;
+        /* padding: 10px 45px; */
         margin-left: 25px;
     }
 }
 
 @media screen and (max-width: 500px) {
     .profile__add-button {
-        padding: 15px 131px;
+        /* padding: 15px 131px; */
         margin: 36px auto 0;
-        max-width: 16px;
+        min-width: 282px;
     }
 }
