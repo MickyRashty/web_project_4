@@ -4,7 +4,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    /* display: flex; */
     justify-content: center;
     align-items: center;
     display: none;
@@ -12,7 +11,7 @@
 
 .popup::after {
     content: "";
-    background-color: #2A2C2F;
+    background-color: black;
     display: block;
     width: 100%;
     height: 100%;

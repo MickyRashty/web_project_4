@@ -7,7 +7,10 @@
     min-height: 50px;
     margin-left: 165px;
     padding: 0;
-    transition: opacity 1s linear;
+    transition: opacity 0.3s linear;
+    position: absolute;
+    right: 0;
+    top: 35px;
 }
 
 .profile__add-button:hover {
@@ -15,23 +18,17 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1135px) {
     .profile__add-button {
-        margin-left: 55px;
+        min-width: 75px;
+        top: 70px;
     }
 }
 
 @media screen and (max-width: 600px) {
     .profile__add-button {
-        /* padding: 10px 45px; */
-        margin-left: 25px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .profile__add-button {
-        /* padding: 15px 131px; */
         margin: 36px auto 0;
         min-width: 282px;
+        position: static;
     }
 }

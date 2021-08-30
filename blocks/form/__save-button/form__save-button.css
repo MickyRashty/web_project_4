@@ -10,7 +10,7 @@
     text-align: center;
     color: #FFF;
     min-height: 50px;
-    transition: opacity 1s linear;
+    transition: opacity 0.3s linear;
 }
 
 .form__save-button:hover {
