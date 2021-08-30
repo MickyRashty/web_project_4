@@ -1,14 +1,13 @@
 .popup {
     width: 100vw;
     height: 100vh;
-    /* background-color: black; */
     position: fixed;
     top: 0;
     left: 0;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
-    /* display: none; */
+    display: none;
 }
 
 .popup::after {
