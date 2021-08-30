@@ -1,4 +1,4 @@
-.edit-layer__container {
+.popup__container {
     background-color: white;
     min-width: 430px;
     min-height: 330px;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 500px) {
-    .edit-layer__container {
+    .popup__container {
         min-width: 288px;
         min-height: 322px;
         margin-top: 95px;
