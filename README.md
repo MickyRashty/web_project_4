@@ -1,16 +1,31 @@
-# Project 4: Around The U.S.
+# Project 4: Around The U.S
 
-### Overview
+## '''Basic JavaScript - Practicum100'''
+### Micky Rashty
 
-* Figma
-* Images
+#### Project Description
 
-**Figma**
+This project is the first project of the Basic JavaScript course at Practicum100. 
+I built a *single web-page* that contains a profile info (incl. picture, name & about sections), Edit & Add buttons, and image grid.
+In this project I used different technologies and for the first time used JavaScript to control elements behaviour. 
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+#### Project Description
 
-**Images**
+some of the techniques and the technologies I used are:
+* Flexbox
+* Grid
+* Positioning
+* Font import
+* Font smoothing for chrome and firefox
+* BEM nested file structure
+* JavaScript
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+and more... :-)
 
-Have fun with JavaScript!
+#### Project link on GitHub Pages
+
+(https://mickyrashty.github.io/web_project_4/)
+
+
+Have fun!
+
