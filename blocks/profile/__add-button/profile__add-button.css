@@ -7,10 +7,7 @@
     min-height: 50px;
     margin-left: 165px;
     padding: 0;
-    transition: opacity 0.3s linear;
-    position: absolute;
-    right: 0;
-    top: 35px;
+    transition: opacity 1s linear;
 }
 
 .profile__add-button:hover {
@@ -18,17 +15,18 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1135px) {
+@media screen and (max-width: 745px) {
     .profile__add-button {
-        min-width: 75px;
-        top: 70px;
+        padding: 10px 45px;
+        margin-left: 25px;
     }
 }
 
 @media screen and (max-width: 600px) {
     .profile__add-button {
+        padding: 15px 131px;
         margin: 36px auto 0;
+        max-width: 16px;
         min-width: 282px;
-        position: static;
     }
 }

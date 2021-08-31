@@ -8,7 +8,7 @@
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .profile__info {
         margin-left: 0;
     }
