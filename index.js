@@ -14,11 +14,8 @@ let profileAboutElement = document.querySelector(".profile__info-about");
 function openPopup() {
     popup.classList.add("popup_open");
 
-    let profileName = profileNameElement.textContent;
-    let profileAbout = profileAboutElement.textContent;
-
-    inputName.value = profileName;
-    inputAbout.value = profileAbout;
+    inputName.value = profileNameElement.textContent;
+    inputAbout.value = profileAboutElement.textContent;
 }
 
 function closePopup() {
@@ -28,11 +25,8 @@ function closePopup() {
 function handleFormSubmit(e) {
     e.preventDefault();
 
-    let nameValue = inputName.value;
-    let aboutValue = inputAbout.value;
-
-    profileNameElement.textContent = nameValue;
-    profileAboutElement.textContent = aboutValue;
+    profileNameElement.textContent = inputName.value;
+    profileAboutElement.textContent = inputAbout.value;
 
     closePopup();
 }
