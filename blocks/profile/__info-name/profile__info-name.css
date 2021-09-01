@@ -10,20 +10,21 @@
     max-width: 373px; 
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-width: 920px) {
     .profile__info-name {
         font-size: 30px;
     }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
     .profile__info-name {
         font-size: 25px;
     }
 }
 
-@media screen and (max-width:640px) {
+@media screen and (max-width: 640px) {
     .profile__info-name {
         font-size: 22px;
+        max-width: 196px;
     }
 }
