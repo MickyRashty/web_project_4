@@ -1,44 +1,61 @@
-let editButton = document.querySelector(".profile__edit-button");
-let popup = document.querySelector(".popup");
-let closeButton = document.querySelector(".popup__close-button");
-let saveButton = document.querySelector(".form__save-button");
-let form = document.querySelector(".form");
+// Profile-Section buttons
+const editButton = document.querySelector(".profile__edit-button");
+const addButton = document.querySelector(".profile__add-button");
 
-let inputName = document.querySelector(".form__input_type_name");
-let inputAbout = document.querySelector(".form__input_type_about");
+// Popup-form
+const popupEditProfile = document.querySelector(".popup_type_edit-profile");
+const popupAddCard = document.querySelector(".popup_type_add-card");
 
-let profileNameElement = document.querySelector(".profile__info-name");
-let profileAboutElement = document.querySelector(".profile__info-about");
+const forms = document.querySelectorAll(".form");
+const allCloseButtons = document.querySelectorAll(".popup__close-button");
+const formSubmitButton = document.querySelector(".form__button");
 
+//Popup-editForm
+const inputName = document.querySelector(".form__input_type_name");
+const inputAbout = document.querySelector(".form__input_type_about");
 
-function openPopup() {
-    popup.classList.add("popup_open");
+//Popup-addForm
+const inputTitle = document.querySelector(".form__input_type_title");
+const inputLink = document.querySelector(".form__input_type_link");
 
-    let profileName = profileNameElement.textContent;
-    let profileAbout = profileAboutElement.textContent;
+// Propfile-Section fields
+const profileNameElement = document.querySelector(".profile__info-name");
+const profileAboutElement = document.querySelector(".profile__info-about");
 
-    inputName.value = profileName;
-    inputAbout.value = profileAbout;
-}
+// Card fields
+const cardTitle = document.querySelector("card__text");
 
-function closePopup() {
-    popup.classList.remove("popup_open");
-}
+// Popup functions - toggle/Close/Submit
+function togglePopup(popup) {
+
+    if (popup.classList.contains("popup_type_edit-profile")) {
+        inputName.value = profileNameElement.textContent;
+        inputAbout.value = profileAboutElement.textContent;
+    }
+
+    popup.classList.toggle("popup_open");
+};
+
+function closePopups() {
+    const allPopups = document.querySelectorAll(".popup");
+    allPopups.forEach(popup => {
+        if (popup.classList.contains("popup_open")) {
+            popup.classList.remove("popup_open")
+        }
+    });
+};
 
 function handleFormSubmit(e) {
     e.preventDefault();
 
-    let nameValue = inputName.value;
-    let aboutValue = inputAbout.value;
+    profileNameElement.textContent = inputName.value;
+    profileAboutElement.textContent = inputAbout.value;
 
-    profileNameElement.textContent = nameValue;
-    profileAboutElement.textContent = aboutValue;
+    closePopups();
+};
 
-    closePopup();
-}
-
-editButton.addEventListener("click", openPopup);
-
-closeButton.addEventListener("click", closePopup);
-
-form.addEventListener("submit", handleFormSubmit);
+// Event Listeners
+editButton.addEventListener("click", () => { togglePopup(popupEditProfile); });
+addButton.addEventListener("click", () => { togglePopup(popupAddCard); });
+allCloseButtons.forEach(btn => btn.addEventListener("click", closePopups));
+forms.forEach(form => form.addEventListener("submit", handleFormSubmit));
