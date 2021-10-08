@@ -1,3 +1,30 @@
+const initialCards = [
+    {
+        name: "Yosemite Valley",
+        link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+    },
+    {
+        name: "Lake Louise",
+        link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+    },
+    {
+        name: "Bald Mountains",
+        link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+    },
+    {
+        name: "Latemar",
+        link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+    },
+    {
+        name: "Vanoise National Park",
+        link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+    },
+    {
+        name: "Lago di Braies",
+        link: "https://code.s3.yandex.net/web-code/lago.jpg"
+    }
+];
+
 // Profile-Section buttons
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -21,6 +48,10 @@ const inputLink = document.querySelector(".form__input_type_link");
 // Propfile-Section fields
 const profileNameElement = document.querySelector(".profile__info-name");
 const profileAboutElement = document.querySelector(".profile__info-about");
+
+// Cards
+const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
+const cards = document.querySelector(".cards");
 
 // Card fields
 const cardTitle = document.querySelector("card__text");
@@ -54,8 +85,21 @@ function handleFormSubmit(e) {
     closePopups();
 };
 
+// Cards functions - add/delete/popup
+function createCardElement(cardData) { // { title, link }
+    const card = cardTemplate.cloneNode(true);
+    card.querySelector(".card__text").textContent = cardData.name;
+    card.querySelector(".card__image").src = cardData.link;
+
+    return card;
+}
+
 // Event Listeners
 editButton.addEventListener("click", () => { togglePopup(popupEditProfile); });
 addButton.addEventListener("click", () => { togglePopup(popupAddCard); });
 allCloseButtons.forEach(btn => btn.addEventListener("click", closePopups));
 forms.forEach(form => form.addEventListener("submit", handleFormSubmit));
+
+initialCards.forEach(initialCardData => {
+    cards.append(createCardElement(initialCardData));
+})
