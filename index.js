@@ -35,7 +35,6 @@ const popupAddCard = document.querySelector(".popup_type_add-card");
 
 const forms = document.querySelectorAll(".form");
 const allCloseButtons = document.querySelectorAll(".popup__close-button");
-const formSubmitButton = document.querySelector(".form__button");
 
 //Popup-editForm
 const inputName = document.querySelector(".form__input_type_name");
@@ -91,7 +90,6 @@ function handleFormSubmit(e, form) {
         cards.prepend(createCardElement(cardData));
         inputTitle.value = "";
         inputLink.value = "";
-
     }
 
     closePopups();
@@ -102,6 +100,12 @@ function createCardElement(cardData) { // { title, link }
     const card = cardTemplate.cloneNode(true);
     card.querySelector(".card__text").textContent = cardData.name;
     card.querySelector(".card__image").src = cardData.link;
+
+    const deleteButton = card.querySelector(".card__delete-button");
+    const likeButton = card.querySelector(".card__like-button");
+
+    deleteButton.addEventListener("click", () => { card.remove() });
+    likeButton.addEventListener("click", () => { likeButton.classList.toggle("card__like-button-full") });
 
     return card;
 }
