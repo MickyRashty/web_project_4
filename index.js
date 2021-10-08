@@ -32,7 +32,11 @@ const addButton = document.querySelector(".profile__add-button");
 // Popup-form
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
 const popupAddCard = document.querySelector(".popup_type_add-card");
+const editForm = popupEditProfile.querySelector(".form");
+const addForm = popupAddCard.querySelector(".form");
 const popupCardImage = document.querySelector(".popup_type_card-picture");
+const cardImagePopup = popupCardImage.querySelector(".popup__card-image");
+const cardTextPopup = popupCardImage.querySelector(".popup__card-text");
 
 const forms = document.querySelectorAll(".form");
 const allCloseButtons = document.querySelectorAll(".popup__close-button");
@@ -58,12 +62,6 @@ const cardTitle = document.querySelector("card__text");
 
 // Popup functions - toggle/Close/Submit
 function togglePopup(popup) {
-
-    if (popup.classList.contains("popup_type_edit-profile")) {
-        inputName.value = profileNameElement.textContent;
-        inputAbout.value = profileAboutElement.textContent;
-    }
-
     popup.classList.toggle("popup_open");
 };
 
@@ -71,30 +69,36 @@ function closePopups() {
     const allPopups = document.querySelectorAll(".popup");
     allPopups.forEach(popup => {
         if (popup.classList.contains("popup_open")) {
-            popup.classList.remove("popup_open")
+            togglePopup(popup);
         }
     });
 };
 
-function handleFormSubmit(e, form) {
+function handleEditFormSubmit(e) {
     e.preventDefault();
 
-    if (form.contains(inputName)) {
-        profileNameElement.textContent = inputName.value;
-        profileAboutElement.textContent = inputAbout.value;
-    } else if (form.contains(inputTitle)) {
-        const cardData = {
-            name: inputTitle.value,
-            link: inputLink.value
-        };
-    
-        cards.prepend(createCardElement(cardData));
-        inputTitle.value = "";
-        inputLink.value = "";
-    }
+    profileNameElement.textContent = inputName.value;
+    profileAboutElement.textContent = inputAbout.value;
 
     closePopups();
 };
+
+function handleAddFormSubmit(e) {
+    e.preventDefault();
+
+    const cardData = {
+        name: inputTitle.value,
+        link: inputLink.value
+    };
+
+    cards.prepend(createCardElement(cardData));
+    inputTitle.value = "";
+    inputLink.value = "";
+
+    closePopups();
+};
+
+
 
 // Cards functions - add/delete/popup/like
 function createCardElement(cardData) { // { title, link }
@@ -111,10 +115,9 @@ function createCardElement(cardData) { // { title, link }
     deleteButton.addEventListener("click", () => { card.remove() });
     likeButton.addEventListener("click", () => { likeButton.classList.toggle("card__like-button-full") });
     cardImage.addEventListener("click", () => {
-        const cardImagePopup = popupCardImage.querySelector(".popup__card-image");
         cardImagePopup.src = cardImage.src;
         cardImagePopup.alt = cardText.textContent;
-        popupCardImage.querySelector(".popup__card-text").textContent = cardText.textContent;
+        cardTextPopup.textContent = cardText.textContent
         togglePopup(popupCardImage);
     });
 
@@ -122,10 +125,18 @@ function createCardElement(cardData) { // { title, link }
 }
 
 // Event Listeners
-editButton.addEventListener("click", () => { togglePopup(popupEditProfile); });
+editButton.addEventListener("click", () => { 
+    if (popupEditProfile.classList.contains("popup_type_edit-profile")) {
+        inputName.value = profileNameElement.textContent;
+        inputAbout.value = profileAboutElement.textContent;
+    }
+    
+    togglePopup(popupEditProfile);
+});
 addButton.addEventListener("click", () => { togglePopup(popupAddCard); });
 allCloseButtons.forEach(btn => btn.addEventListener("click", closePopups));
-forms.forEach(form => form.addEventListener("submit", (e) => handleFormSubmit(e, form)));
+editForm.addEventListener("submit", handleEditFormSubmit);
+addForm.addEventListener("submit", handleAddFormSubmit);
 
 initialCards.forEach(initialCardData => {
     cards.append(createCardElement(initialCardData));
