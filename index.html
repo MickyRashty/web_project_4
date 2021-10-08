@@ -38,7 +38,8 @@
                     <form action="#" class="form">
                         <h2 class="form__title">Edit Profile</h2>
                         <input type="text" class="form__input form__input_type_name" placeholder="Name" name="name">
-                        <input type="text" class="form__input form__input_type_about" placeholder="About me" name="about">
+                        <input type="text" class="form__input form__input_type_about" placeholder="About me"
+                            name="about">
                         <button type="submit" class="form__button">Save</button>
                     </form>
                 </div>
@@ -51,61 +52,38 @@
                     <form action="#" class="form">
                         <h2 class="form__title">New place</h2>
                         <input type="text" class="form__input form__input_type_title" placeholder="Title" name="title">
-                        <input type="text" class="form__input form__input_type_link" placeholder="Image link" name="link">
+                        <input type="text" class="form__input form__input_type_link" placeholder="Image link"
+                            name="link">
                         <button type="submit" class="form__button">Create</button>
                     </form>
                 </div>
             </section>
-            <section class="cards">
-                <div class="card">
-                    <img class="card__image" src="./images/Yosemite-Valley.jpg" alt="Yosemite Valley">
-                    <div class="card__description">
-                        <p class="card__text">Yosemite Valley</p>
-                        <button class="card__like-button"></button>
+            <section class="popup popup_type_card-picture">
+                <div class="popup__container popup__container_type_picture">
+                    <div>
+                        <button class="popup__close-button" type="submit"></button>
                     </div>
-                </div>
-                <div class="card">
-                    <img class="card__image" src="./images/Lake-Louise.jpg" alt="Lake Louise">
-                    <div class="card__description">
-                        <p class="card__text">Lake Louise</p>
-                        <button class="card__like-button"></button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card__image" src="./images/Bald-Mountains.jpg" alt="Bald Mountains">
-                    <div class="card__description">
-                        <p class="card__text">Bald Mountains</p>
-                        <button class="card__like-button"></button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card__image" src="./images/Latemar.jpg" alt="Latemar">
-                    <div class="card__description">
-                        <p class="card__text">Latemar</p>
-                        <button class="card__like-button"></button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card__image" src="./images/Vanoise-National-Park.jpg" alt="Vanoise National Park">
-                    <div class="card__description">
-                        <p class="card__text">Vanoise National Park</p>
-                        <button class="card__like-button"></button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card__image" src="./images/Lago-di-Braies.jpg" alt="Lago di Braies">
-                    <div class="card__description">
-                        <p class="card__text">Lago di Braies</p>
-                        <button class="card__like-button"></button>
-                    </div>
+                    <img class="card__image-popup">
+                    <p class="card__text-popup"></p>
                 </div>
             </section>
+            <section class="cards"></section>
         </main>
 
         <footer class="footer">
             <p class="footer__copyrights">© 2021 Around The U.S.</p>
         </footer>
     </div>
+    <template id="card-template">
+        <div class="card">
+            <img class="card__image">
+            <button class="card__delete-button"></button>
+            <div class="card__description">
+                <p class="card__text"></p>
+                <button class="card__like-button"></button>
+            </div>
+        </div>
+    </template>
     <script src="./index.js"></script>
 </body>
 
