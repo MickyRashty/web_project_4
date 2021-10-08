@@ -45,9 +45,6 @@ const inputAbout = document.querySelector(".form__input_type_about");
 const inputTitle = document.querySelector(".form__input_type_title");
 const inputLink = document.querySelector(".form__input_type_link");
 
-function closePopup() {
-    popup.classList.remove("popup_open");
-}
 // Propfile-Section fields
 const profileNameElement = document.querySelector(".profile__info-name");
 const profileAboutElement = document.querySelector(".profile__info-about");
@@ -90,9 +87,7 @@ function handleFormSubmit(e, form) {
             name: inputTitle.value,
             link: inputLink.value
         };
-
-    closePopup();
-}
+    
         cards.prepend(createCardElement(cardData));
         inputTitle.value = "";
         inputLink.value = "";
@@ -116,10 +111,10 @@ function createCardElement(cardData) { // { title, link }
     deleteButton.addEventListener("click", () => { card.remove() });
     likeButton.addEventListener("click", () => { likeButton.classList.toggle("card__like-button-full") });
     cardImage.addEventListener("click", () => {
-        const cardImagePopup = popupCardImage.querySelector(".card__image-popup");
+        const cardImagePopup = popupCardImage.querySelector(".popup__card-image");
         cardImagePopup.src = cardImage.src;
         cardImagePopup.alt = cardText.textContent;
-        popupCardImage.querySelector(".card__text-popup").textContent = cardText.textContent;
+        popupCardImage.querySelector(".popup__card-text").textContent = cardText.textContent;
         togglePopup(popupCardImage);
     });
 
