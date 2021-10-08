@@ -76,11 +76,23 @@ function closePopups() {
     });
 };
 
-function handleFormSubmit(e) {
+function handleFormSubmit(e, form) {
     e.preventDefault();
 
-    profileNameElement.textContent = inputName.value;
-    profileAboutElement.textContent = inputAbout.value;
+    if (form.contains(inputName)) {
+        profileNameElement.textContent = inputName.value;
+        profileAboutElement.textContent = inputAbout.value;    
+    } else if (form.contains(inputTitle)) {
+        const cardData = {
+            name: inputTitle.value, 
+            link: inputLink.value
+        };
+
+        cards.prepend(createCardElement(cardData));
+        inputTitle.value = "";
+        inputLink.value = "";
+
+    }
 
     closePopups();
 };
@@ -98,7 +110,7 @@ function createCardElement(cardData) { // { title, link }
 editButton.addEventListener("click", () => { togglePopup(popupEditProfile); });
 addButton.addEventListener("click", () => { togglePopup(popupAddCard); });
 allCloseButtons.forEach(btn => btn.addEventListener("click", closePopups));
-forms.forEach(form => form.addEventListener("submit", handleFormSubmit));
+forms.forEach(form => form.addEventListener("submit", (e) => handleFormSubmit(e, form)));
 
 initialCards.forEach(initialCardData => {
     cards.append(createCardElement(initialCardData));
