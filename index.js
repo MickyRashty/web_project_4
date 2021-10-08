@@ -32,6 +32,7 @@ const addButton = document.querySelector(".profile__add-button");
 // Popup-form
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
 const popupAddCard = document.querySelector(".popup_type_add-card");
+const popupCardImage = document.querySelector(".popup_type_card-picture");
 
 const forms = document.querySelectorAll(".form");
 const allCloseButtons = document.querySelectorAll(".popup__close-button");
@@ -80,10 +81,10 @@ function handleFormSubmit(e, form) {
 
     if (form.contains(inputName)) {
         profileNameElement.textContent = inputName.value;
-        profileAboutElement.textContent = inputAbout.value;    
+        profileAboutElement.textContent = inputAbout.value;
     } else if (form.contains(inputTitle)) {
         const cardData = {
-            name: inputTitle.value, 
+            name: inputTitle.value,
             link: inputLink.value
         };
 
@@ -95,17 +96,27 @@ function handleFormSubmit(e, form) {
     closePopups();
 };
 
-// Cards functions - add/delete/popup
+// Cards functions - add/delete/popup/like
 function createCardElement(cardData) { // { title, link }
     const card = cardTemplate.cloneNode(true);
-    card.querySelector(".card__text").textContent = cardData.name;
-    card.querySelector(".card__image").src = cardData.link;
-
+    const cardImage = card.querySelector(".card__image");
+    const cardText = card.querySelector(".card__text");
     const deleteButton = card.querySelector(".card__delete-button");
     const likeButton = card.querySelector(".card__like-button");
 
+    cardText.textContent = cardData.name;
+    cardImage.src = cardData.link;
+    cardImage.alt = cardData.name;
+
     deleteButton.addEventListener("click", () => { card.remove() });
     likeButton.addEventListener("click", () => { likeButton.classList.toggle("card__like-button-full") });
+    cardImage.addEventListener("click", () => {
+        const cardImagePopup = popupCardImage.querySelector(".card__image-popup");
+        cardImagePopup.src = cardImage.src;
+        cardImagePopup.alt = cardText.textContent;
+        popupCardImage.querySelector(".card__text-popup").textContent = cardText.textContent;
+        togglePopup(popupCardImage);
+    });
 
     return card;
 }
