@@ -30,7 +30,7 @@
                 </div>
                 <button class="profile__add-button"></button>
             </section>
-            <section class="popup">
+            <section class="popup popup_type_edit-profile">
                 <div class="popup__container">
                     <div>
                         <button class="popup__close-button" type="submit"></button>
@@ -38,9 +38,21 @@
                     <form action="#" class="form">
                         <h2 class="form__title">Edit Profile</h2>
                         <input type="text" class="form__input form__input_type_name" placeholder="Name" name="name">
-                        <input type="text" class="form__input form__input_type_about" placeholder="About me"
-                            name="about">
-                        <button type="submit" class="form__save-button">Save</button>
+                        <input type="text" class="form__input form__input_type_about" placeholder="About me" name="about">
+                        <button type="submit" class="form__button">Save</button>
+                    </form>
+                </div>
+            </section>
+            <section class="popup popup_type_add-card">
+                <div class="popup__container">
+                    <div>
+                        <button class="popup__close-button" type="submit"></button>
+                    </div>
+                    <form action="#" class="form">
+                        <h2 class="form__title">New place</h2>
+                        <input type="text" class="form__input form__input_type_title" placeholder="Title" name="title">
+                        <input type="text" class="form__input form__input_type_link" placeholder="Image link" name="link">
+                        <button type="submit" class="form__button">Create</button>
                     </form>
                 </div>
             </section>
