@@ -18,24 +18,20 @@
 
         <main class="content">
             <section class="profile">
-                <div>
-                    <img class="profile__image" src="./images/profile-image.jpg" alt="profile picture">
-                </div>
+                <img class="profile__image" src="./images/profile-image.jpg" alt="profile picture">
                 <div class="profile__info">
                     <div class="profile__info-top-row">
-                        <p class="profile__info-name">Jacques Cousteau</p>
-                        <button class="profile__edit-button"></button>
+                        <h1 class="profile__info-name">Jacques Cousteau</h1>
+                        <button class="profile__edit-button" type="button" aria-label="Edit profile info"></button>
                     </div>
                     <p class="profile__info-about">Explorer</p>
                 </div>
-                <button class="profile__add-button"></button>
+                <button class="profile__add-button" type="button" aria-label="Add card"></button>
             </section>
             <section class="popup popup_type_edit-profile">
                 <div class="popup__container">
-                    <div>
-                        <button class="popup__close-button" type="submit"></button>
-                    </div>
-                    <form action="#" class="form">
+                    <button class="popup__close-button" type="button" aria-label="Close edit form"></button>
+                    <form action="#" class="form" name="editForm">
                         <h2 class="form__title">Edit Profile</h2>
                         <input type="text" class="form__input form__input_type_name" placeholder="Name" name="name">
                         <input type="text" class="form__input form__input_type_about" placeholder="About me"
@@ -63,8 +59,8 @@
                     <div>
                         <button class="popup__close-button" type="submit"></button>
                     </div>
-                    <img class="card__image-popup">
-                    <p class="card__text-popup"></p>
+                    <img class="popup__card-image" src="#" alt="#">
+                    <p class="popup__card-text"></p>
                 </div>
             </section>
             <section class="cards"></section>
@@ -76,7 +72,7 @@
     </div>
     <template id="card-template">
         <div class="card">
-            <img class="card__image">
+            <img class="card__image" src="#" alt="#">
             <button class="card__delete-button"></button>
             <div class="card__description">
                 <p class="card__text"></p>
