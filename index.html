@@ -33,10 +33,12 @@
                     <button class="popup__close-button" type="button" aria-label="Close edit form"></button>
                     <form action="#" class="form" name="editForm">
                         <h2 class="form__title">Edit Profile</h2>
-                        <input type="text" class="form__input form__input_type_name" placeholder="Name" name="name">
-                        <input type="text" class="form__input form__input_type_about" placeholder="About me"
-                            name="about">
-                        <button type="submit" class="form__button">Save</button>
+                        <input id="input_type_name" type="text" class="form__input form__input_type_name" placeholder="Name" name="name" minlength="2" maxlength="40" required>
+                        <span id="input_type_name-error" class="form__error"></span>
+                        <input id="input_type_about" type="text" class="form__input form__input_type_about" placeholder="About me"
+                            name="about" minlength="2" maxlength="200" required>
+                        <span id="input_type_about-error" class="form__error"></span>
+                        <button type="submit" class="form__button form__button_disabled">Save</button>
                     </form>
                 </div>
             </section>
@@ -47,10 +49,12 @@
                     </div>
                     <form action="#" class="form">
                         <h2 class="form__title">New place</h2>
-                        <input type="text" class="form__input form__input_type_title" placeholder="Title" name="title">
-                        <input type="text" class="form__input form__input_type_link" placeholder="Image link"
-                            name="link">
-                        <button type="submit" class="form__button">Create</button>
+                        <input id="input_type_title" type="text" class="form__input form__input_type_title" placeholder="Title" name="title" minlength="1" maxlength="30" required>
+                        <span id="input_type_title-error" class="form__error"></span>
+                        <input id="input_type_link" type="url" class="form__input form__input_type_link" placeholder="Image link"
+                            name="link" required>
+                        <span id="input_type_link-error" class="form__error"></span>
+                        <button type="submit" class="form__button form__button_disabled">Create</button>
                     </form>
                 </div>
             </section>
@@ -80,7 +84,8 @@
             </div>
         </div>
     </template>
-    <script src="./index.js"></script>
+    <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validate.js" defer></script>
 </body>
 
 </html>
