@@ -30,6 +30,7 @@ const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 
 // Popup-form
+const popupOverlays = document.querySelectorAll(".popup");
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
 const popupAddCard = document.querySelector(".popup_type_add-card");
 const editForm = popupEditProfile.querySelector(".form");
@@ -131,6 +132,7 @@ editButton.addEventListener("click", () => {
         inputAbout.value = profileAboutElement.textContent;
     }
     
+    checkInitialFormValidity(editForm, pageSettings);
     togglePopup(popupEditProfile);
 });
 addButton.addEventListener("click", () => { togglePopup(popupAddCard); });
@@ -141,3 +143,15 @@ addForm.addEventListener("submit", handleAddFormSubmit);
 initialCards.forEach(initialCardData => {
     cards.append(createCardElement(initialCardData));
 })
+
+popupOverlays.forEach(overlay => overlay.addEventListener("click", (evt) => {
+    if(evt.target.classList.contains("popup")) {
+        closePopups();
+    }
+}));
+
+document.addEventListener("keydown", (evt) => {
+    if(evt.key === "Escape") {
+        closePopups();
+    }
+});
