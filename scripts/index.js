@@ -64,8 +64,8 @@ const cardTitle = document.querySelector("card__text");
 // Popup functions - toggle/Close/Submit
 function openPopup(popup) {
     popup.classList.add("popup_open");
-    document.addEventListener("keydown", onEsc);
-    popup.addEventListener("mousedown", onOverlayMousedown);
+    document.addEventListener("keydown", handleEscPress);
+    popup.addEventListener("mousedown", handleOverlayMouseDown);
 };
 
 
@@ -74,8 +74,8 @@ function closePopup() {
 
     if (openedPopup) {
         openedPopup.classList.remove("popup_open");
-        document.removeEventListener("keydown", onEsc);
-        openedPopup.rempveEventListener("mousedown", onOverlayMousedown);
+        document.removeEventListener("keydown", handleEscPress);
+        openedPopup.removeEventListener("mousedown", handleOverlayMouseDown);
     }
 };
 
@@ -149,13 +149,13 @@ initialCards.forEach(initialCardData => {
     cards.append(createCardElement(initialCardData));
 });
 
-function onOverlayMousedown(evt) {
+function handleOverlayMouseDown(evt) {
     if (evt.target.classList.contains("popup")) {
-        closePopup();
+        closePopup(popup);
     }
 };
 
-function onEsc(evt) {
+function handleEscPress(evt) {
     if (evt.key === "Escape") {
         closePopup();
     }
