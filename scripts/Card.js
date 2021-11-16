@@ -2,6 +2,10 @@
 
 import { openPopup } from "./utils.js";
 
+const popupCardImage = document.querySelector(".popup_type_card-picture");
+const cardImagePopup = popupCardImage.querySelector(".popup__card-image");
+const cardTextPopup = popupCardImage.querySelector(".popup__card-text");
+
 class Card {
     constructor(name, link, template) {
         this._name = name;
@@ -10,32 +14,29 @@ class Card {
     }
 
     _createClone() {
-        const card = this._template.cloneNode(true);
-        const cardImage = card.querySelector(".card__image");
-        const cardText = card.querySelector(".card__text");
+        this._card = this._template.cloneNode(true);
+        const cardImage = this._card.querySelector(".card__image");
+        const cardText = this._card.querySelector(".card__text");
 
         cardText.textContent = this._name;
         cardImage.src = this._link;
         cardImage.alt = this._name;
 
-        return card;
+        return this._card;
     }
 
-    _addDeleteButtonListener(card) {
-        const deleteButton = card.querySelector(".card__delete-button");
-        deleteButton.addEventListener("click", () => { card.remove() });
+    _addDeleteButtonListener() {
+        const deleteButton = this._card.querySelector(".card__delete-button");
+        deleteButton.addEventListener("click", () => { this._card.remove() });
     }
 
-    _addLikeButtonListener(card) {
-        const likeButton = card.querySelector(".card__like-button");
+    _addLikeButtonListener() {
+        const likeButton = this._card.querySelector(".card__like-button");
         likeButton.addEventListener("click", () => { likeButton.classList.toggle("card__like-button-full") });
     }
 
-    _addCardImageListener (card) {
-        const cardImage = card.querySelector(".card__image");
-        const popupCardImage = document.querySelector(".popup_type_card-picture");
-        const cardImagePopup = popupCardImage.querySelector(".popup__card-image");
-        const cardTextPopup = popupCardImage.querySelector(".popup__card-text");
+    _addCardImageListener() {
+        const cardImage = this._card.querySelector(".card__image");
 
         cardImage.addEventListener("click", () => {
             cardImagePopup.src = this._link;
@@ -45,13 +46,16 @@ class Card {
         });
     }
 
-    createCard() {
-        const card = this._createClone();
-        this._addDeleteButtonListener(card);
-        this._addLikeButtonListener(card);
-        this._addCardImageListener(card);
+    _setEventListeners() {
+        this._addDeleteButtonListener();
+        this._addLikeButtonListener();
+        this._addCardImageListener();
+    }
 
-        return card;
+    createCard() {
+        this._card = this._createClone();
+        this._setEventListeners();
+        return this._card;
     }
 }
 
