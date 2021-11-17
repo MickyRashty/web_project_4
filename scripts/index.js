@@ -1,7 +1,6 @@
 // index JS file
 
 import { Card } from "./Card.js";
-import FormValidator from "./FormValidator.js";
 import { inputName, inputAbout, profileNameElement, profileAboutElement, closePopup, setOpenEditFormListener, setOpenAddFormListener } from './utils.js';
 
 const initialCards = [
@@ -106,12 +105,6 @@ initialCards.forEach(initialCardData => {
     const card = createCardElement(name, link);
 
     cards.append(card);
-});
-
-forms.forEach(formElement => {
-    const formValidator = new FormValidator(settings, formElement);
-
-    formValidator.enableValidation();
 });
 
 setOpenEditFormListener(editButton, popupEditProfile, settings);

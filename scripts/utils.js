@@ -29,23 +29,25 @@ function closePopup() {
 // Event Listeners
 const setOpenEditFormListener = (editButton, popupEditProfile, settings) => {
     const editForm = popupEditProfile.querySelector(".form");
-    const formReset = new FormValidator(settings, editForm);
+    const formValidator = new FormValidator(settings, editForm);
+    formValidator.enableValidation();
 
     editButton.addEventListener("click", () => {
         inputName.value = profileNameElement.textContent;
         inputAbout.value = profileAboutElement.textContent;
         
-        formReset.resetValidation();
+        formValidator.resetValidation();
         openPopup(popupEditProfile);
     });
 };
 
 const setOpenAddFormListener = (addButton, popupAddCard, settings) => {    
     const addForm = popupAddCard.querySelector(".form");
-    const formReset = new FormValidator(settings, addForm);
+    const formValidator = new FormValidator(settings, addForm);
+    formValidator.enableValidation();
     
     addButton.addEventListener("click", () => {
-        formReset.resetValidation();
+        formValidator.resetValidation();
         openPopup(popupAddCard);
     });
 };
