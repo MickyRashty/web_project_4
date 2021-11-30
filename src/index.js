@@ -2,6 +2,10 @@
 
 import { Card } from "./Card.js";
 import { inputName, inputAbout, profileNameElement, profileAboutElement, closePopup, setOpenEditFormListener, setOpenAddFormListener } from './utils.js';
+import "../pages/index.css";
+import headerLogoSrc from "../images/logo-vector.svg";
+import profileImageSrc from "../images/profile-image.jpg";
+
 
 const initialCards = [
     {
@@ -30,6 +34,12 @@ const initialCards = [
     }
 ];
 
+// images
+const headerLogo = document.getElementById("image-header-logo");
+headerLogo.src = headerLogoSrc;
+const profileImage = document.getElementById("image-profile");
+profileImage.src = profileImageSrc;
+
 // Profile-Section buttons
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -45,8 +55,6 @@ const allCloseButtons = document.querySelectorAll(".popup__close-button");
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
 const cards = document.querySelector(".cards");
 
-const formSelector = ".form";
-const forms = Array.from(document.querySelectorAll(formSelector));
 const settings = {
     inputSelector: ".form__input",
     submitButtonSelector: ".form__button",
