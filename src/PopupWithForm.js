@@ -1,7 +1,6 @@
 // PopupWithForm class JS code
 
 import Popup from "./Popup.js";
-import FormValidator from "./FormValidator.js";
 
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, formSubmitHandler) {
@@ -26,10 +25,8 @@ export default class PopupWithForm extends Popup {
         });
     }
 
-    setValidation(settings) {
-        const formValidator = new FormValidator(settings, this._form);
-        formValidator.enableValidation();
-        formValidator.resetValidation();
+    getForm() {
+        return this._form;
     }
 
     setEventListeners() {

@@ -7,6 +7,8 @@ import profileImageSrc from "../images/profile-image.jpg";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import Section from "./Section.js";
+import UserInfo from "./UserInfo.js";
+import FormValidator from "./FormValidator.js";
 
 
 const initialCards = [
@@ -48,15 +50,13 @@ popupCardImage.setEventListeners();
 // Profile-Section buttons
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
-const profileNameElement = document.querySelector(".profile__info-name");
-const profileAboutElement = document.querySelector(".profile__info-about");
+
+const profileUserInfo = new UserInfo({ userNameSelector: ".profile__info-name", userJobSelector: ".profile__info-about" });
 
 // Popup-form
 function handleEditFormSubmit(inputValues) {
     const [nameValue, aboutValue] = inputValues;
-
-    profileNameElement.textContent = nameValue;
-    profileAboutElement.textContent = aboutValue;
+    profileUserInfo.setUserInfo({ name: nameValue, about: aboutValue });
 };
 
 function handleAddFormSubmit(inputValues) {
@@ -76,14 +76,20 @@ popupEditProfile.setEventListeners();
 popupAddCard.setEventListeners();
 
 editButton.addEventListener("click", (e) => {
+    const { name, about } = profileUserInfo.getUserInfo();
+    const formValidator = new FormValidator(settings, popupEditProfile.getForm());
+
+    popupEditProfile.setInputValues([name, about]);
+    formValidator.enableValidation();
+    formValidator.resetValidation();
     popupEditProfile.open();
-    popupEditProfile.setInputValues([profileNameElement.textContent, profileAboutElement.textContent]);
-    popupEditProfile.setValidation(settings);
 });
 
 addButton.addEventListener("click", (e) => {
+    const formValidator = new FormValidator(settings, popupAddCard.getForm());
+    formValidator.enableValidation();
+    formValidator.resetValidation();
     popupAddCard.open();
-    popupAddCard.setValidation(settings);
 });
 
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
