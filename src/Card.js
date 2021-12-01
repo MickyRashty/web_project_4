@@ -1,16 +1,11 @@
 // Crad class JS code
 
-import { openPopup } from "./utils.js";
-
-const popupCardImage = document.querySelector(".popup_type_card-picture");
-const cardImagePopup = popupCardImage.querySelector(".popup__card-image");
-const cardTextPopup = popupCardImage.querySelector(".popup__card-text");
-
 class Card {
-    constructor(name, link, template) {
+    constructor(name, link, template, handleCardClick) {
         this._name = name;
         this._link = link;
         this._template = template;
+        this._handleCardClick = handleCardClick;
     }
 
     _createClone() {
@@ -35,14 +30,15 @@ class Card {
         likeButton.addEventListener("click", () => { likeButton.classList.toggle("card__like-button-full") });
     }
 
+    _onCardClick() {
+        this._handleCardClick({ link: this._link, text: this._name });
+    }
+
     _addCardImageListener() {
         const cardImage = this._card.querySelector(".card__image");
 
         cardImage.addEventListener("click", () => {
-            cardImagePopup.src = this._link;
-            cardImagePopup.alt = this._name;
-            cardTextPopup.textContent = this._name;
-            openPopup(popupCardImage);
+            this._onCardClick();
         });
     }
 
