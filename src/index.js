@@ -6,6 +6,7 @@ import headerLogoSrc from "../images/logo-vector.svg";
 import profileImageSrc from "../images/profile-image.jpg";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import Section from "./Section.js";
 
 
 const initialCards = [
@@ -63,7 +64,7 @@ function handleAddFormSubmit(inputValues) {
     const name = inputTitleValue;
     const link = inputLinkValue;
     
-    const card = createCardElement(name, link);
+    const card = createCardElement({ name, link });
 
     cards.prepend(card);
 };
@@ -96,17 +97,11 @@ const settings = {
     errorClass: "form__error_visible",
 }
 
-function createCardElement(name, link) {
+const cardsSection = new Section({ items: initialCards, renderer: createCardElement }, ".cards");
+cardsSection.renderer();
+
+function createCardElement({ name, link }) {
     const card = new Card(name, link, cardTemplate, popupCardImage.open);
 
     return card.createCard();
 }
-
-initialCards.forEach(initialCardData => {
-    const name = initialCardData.name;
-    const link = initialCardData.link;
-
-    const card = createCardElement(name, link);
-
-    cards.append(card);
-});
