@@ -2,8 +2,8 @@
 
 import { Card } from "../components/Card.js";
 import "./index.css";
-import headerLogoSrc from "../../images/logo-vector.svg";
-import profileImageSrc from "../../images/profile-image.jpg";
+import headerLogoSrc from "../images/logo-vector.svg";
+import profileImageSrc from "../images/profile-image.jpg";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
