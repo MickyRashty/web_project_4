@@ -5,24 +5,25 @@ import { Card } from "../components/Card.js";
 import "./index.css";
 import Api from "../utils/Api.js";
 import headerLogoSrc from "../images/logo-vector.svg";
-import profileImageSrc from "../images/profile-image.jpg";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithDelete from "../components/PopupWithDelete.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import { headerLogo, profileImage, editButton, addButton, cardTemplate, settings } from "../utils/constants.js";
+import { headerLogo, profileImage, editProfileInfoButton, addNewCardButton, cardTemplate, settings, editProfileImageButton } from "../utils/constants.js";
 
 // Class instances
 const popupCardImage = new PopupWithImage(".popup_type_card-picture");
-const profileUserInfo = new UserInfo({ userNameSelector: ".profile__info-name", userJobSelector: ".profile__info-about" });
+const profileUserInfo = new UserInfo({ userNameSelector: ".profile__info-name", userJobSelector: ".profile__info-about", userAvatarSelector: ".profile__image" });
 const popupEditProfile = new PopupWithForm(".popup_type_edit-profile", handleEditFormSubmit);
 const popupAddCard = new PopupWithForm(".popup_type_add-card", handleAddFormSubmit);
 const popupDeleteButton = new PopupWithDelete(".popup_type_card-delete", handleDeleteFormSubmit);
+const popupChangePicture = new PopupWithForm(".popup_type_profile-image", handleChangeFormSubmit);
 const cardsSection = new Section({ items: [], renderer: createCardElement }, ".cards");
-const editFormValidator = new FormValidator(settings, popupEditProfile.getForm());
-const AddformValidator = new FormValidator(settings, popupAddCard.getForm());
+const editProfileInfoFormValidator = new FormValidator(settings, popupEditProfile.getForm());
+const changePictureFormValidator = new FormValidator(settings, popupChangePicture.getForm());
+const AddCardformValidator = new FormValidator(settings, popupAddCard.getForm());
 const api = new Api({
     baseUrl: "https://around.nomoreparties.co/v1/group-12",
     token: "d32f6df6-a478-44c7-98e2-39f20efb7fb4"
@@ -30,24 +31,33 @@ const api = new Api({
 
 // images
 headerLogo.src = headerLogoSrc;
-profileImage.src = profileImageSrc;
 
 //Popup Card Image
 popupCardImage.setEventListeners();
 
 // Popup Buttons
-editButton.addEventListener("click", (e) => {
+editProfileInfoButton.addEventListener("click", (e) => {
     const { name, about } = profileUserInfo.getUserInfo();
 
     popupEditProfile.setInputValues([name, about]);
-    editFormValidator.resetValidation();
+    editProfileInfoFormValidator.resetValidation();
     popupEditProfile.open();
 });
 
-addButton.addEventListener("click", (e) => {
-    AddformValidator.resetValidation();
+addNewCardButton.addEventListener("click", (e) => {
+    AddCardformValidator.resetValidation();
     popupAddCard.open();
 });
+
+editProfileImageButton.addEventListener("click", (e) => {
+    const { avatar } = profileUserInfo.getUserInfo();
+
+    popupChangePicture.setInputValues([avatar]);
+    changePictureFormValidator.resetValidation();
+    popupChangePicture.open();
+});
+
+
 
 // Popup-forms
 async function handleEditFormSubmit(inputValues) {
@@ -65,18 +75,26 @@ async function handleAddFormSubmit(inputValues) {
     }
 };
 
+async function handleChangeFormSubmit(inputValues) {
+    const { avatar } = inputValues;
+    const profileImage = await api.editProfileImage(avatar);
+    profileUserInfo.setAvatarLink(profileImage);
+}
+
 // Popup-Card Delete
 async function handleDeleteFormSubmit(cardId) {
     const response = await api.deleteCard(cardId);
     return response;
 }
 
-editFormValidator.enableValidation();
-AddformValidator.enableValidation();
+editProfileInfoFormValidator.enableValidation();
+AddCardformValidator.enableValidation();
+changePictureFormValidator.enableValidation();
 
 popupEditProfile.setEventListeners();
 popupAddCard.setEventListeners();
 popupDeleteButton.setEventListeners();
+popupChangePicture.setEventListeners();
 
 // Create Card - Add Card Popup
 function createCardElement(item) {

@@ -17,7 +17,13 @@
 
         <main class="content">
             <section class="profile">
-                <img class="profile__image" id="image-profile" alt="profile picture">
+                <div class="profile__image-container">
+                    <img class="profile__image" id="image-profile" alt="profile picture">
+                    <div class="profile-image-overlay">
+                        <button class="profile__image-edit-button" type="button"
+                            aria-label="Edit profile info"></button>
+                    </div>
+                </div>
                 <div class="profile__info">
                     <div class="profile__info-top-row">
                         <h1 class="profile__info-name">Jacques Cousteau</h1>
@@ -76,6 +82,20 @@
                         <form action="#" class="form" name="deleteVerifyForm">
                             <h2 class="form__title">Are you sure?</h2>
                             <button type="submit" class="form__button">Yes</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section class="popup popup_type_profile-image">
+                <div class="popup__container">
+                    <div>
+                        <button class="popup__close-button" type="submit"></button>
+                        <form action="#" class="form" name="changeProfileImage">
+                            <h2 class="form__title">Change profile picture</h2>
+                            <input id="input_type_link" type="url" class="form__input form__input_type_link"
+                                placeholder="Image link" name="avatar" required>
+                            <span id="input_type_link-error" class="form__error"></span>
+                            <button type="submit" class="form__button">Save</button>
                         </form>
                     </div>
                 </div>

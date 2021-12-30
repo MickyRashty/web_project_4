@@ -50,7 +50,7 @@ export default class Api {
     });
 
     if (response.ok) {
-      return { name, about };
+      return response.json();
     } else {
       console.log("Somthing went wrong", response.status, response.statusText)
     }
@@ -64,8 +64,8 @@ export default class Api {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name,
+        link,
       })
     });
 
@@ -86,6 +86,25 @@ export default class Api {
 
     if (response.ok) {
       return response.ok;
+    } else {
+      console.log("Somthing went wrong", response.status, response.statusText)
+    }
+  }
+
+  async editProfileImage(avatar) {
+    const response = await fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        avatar,
+      })
+    });
+
+    if (response.ok) {
+      return { avatar };
     } else {
       console.log("Somthing went wrong", response.status, response.statusText)
     }
