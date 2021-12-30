@@ -37,4 +37,7 @@
 @import url(../blocks/card/__like-button/card__like-button.css);
 @import url(../blocks/card/__like-button-full/card__like-button-full.css);
 @import url(../blocks/card/__delete-button/card__delete-button.css);
+@import url(../blocks/card/__delete-button/_visibility/card__delete-button_visibility.css);
+/* @import url(../blocks/card/__likes/card__likes.css); */
+/* @import url(../blocks/card/__likes-num/card__likes-num.css); */
 @import url(../blocks/footer/__copyrights/footer__copyrights.css);

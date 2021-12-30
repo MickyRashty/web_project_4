@@ -1,0 +1,4 @@
+.card__likes {
+    /* display: flex; */
+    border: red solid 1px;
+}

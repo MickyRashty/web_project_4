@@ -1,11 +1,16 @@
 // Crad class JS code
 
 class Card {
-    constructor(name, link, template, handleCardClick) {
+    constructor({ name, link, owner: { _id: ownerId }, _id }, template, handleCardClick, handleDeleteClick, shouldHideDeleteIcon) {
         this._name = name;
         this._link = link;
         this._template = template;
         this._handleCardClick = handleCardClick;
+        this._handleDeleteClick = handleDeleteClick;
+        this._shouldHideDeleteIcon = shouldHideDeleteIcon;
+        this._owner = ownerId;
+        this._id = _id;
+
     }
 
     _createClone() {
@@ -20,9 +25,26 @@ class Card {
         return this._card;
     }
 
+    _removeCard = () => {
+        this._card.remove();
+    }
+
+    _onDeleteButtonClick() {
+        this._handleDeleteClick(this._id, this._removeCard);
+    }
+
     _addDeleteButtonListener() {
         const deleteButton = this._card.querySelector(".card__delete-button");
-        deleteButton.addEventListener("click", () => { this._card.remove() });
+
+        const hidden = this._shouldHideDeleteIcon(this._owner);
+
+        if (hidden) {
+            deleteButton.classList.add("card__delete-button_visibility");
+        } else {
+            deleteButton.addEventListener("click", () => {
+                this._onDeleteButtonClick();
+            });
+        }
     }
 
     _addLikeButtonListener() {

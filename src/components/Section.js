@@ -7,6 +7,10 @@ export default class Section {
         this._container = document.querySelector(containerSelector);
     }
 
+    setItems(items) {
+        this._items = items;
+    }
+
     renderer() {
         this._items.forEach(item => {
             const element = this._renderer(item);
