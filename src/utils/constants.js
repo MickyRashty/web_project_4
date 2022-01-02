@@ -13,6 +13,7 @@ export const cardTemplate = document.querySelector("#card-template").content.que
 
 // Form Validation
 export const settings = {
+    formSelector: ".form",
     inputSelector: ".form__input",
     submitButtonSelector: ".form__button",
     inactiveButtonClass: "form__button_disabled",

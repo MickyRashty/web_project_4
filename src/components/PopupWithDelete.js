@@ -9,11 +9,12 @@ export default class PopupWithDelete extends Popup {
     }
 
     _onSubmit() {
-        const response = this._formSubmitHandler(this._cardId);
-
-        if (response) {
-            this._removeHandler();
-        }
+        return this._formSubmitHandler(this._cardId)
+            .then((response) => {
+                if (response) {
+                    this._removeHandler();
+                }
+            });
     }
 
     setEventListeners() {
@@ -21,8 +22,10 @@ export default class PopupWithDelete extends Popup {
 
         this._popup.addEventListener("submit", (evt) => {
             evt.preventDefault();
-            this._onSubmit();
-            this.close();
+            this._onSubmit()
+                .then(() => {
+                    this.close();
+                })
         });
     }
 
@@ -31,9 +34,5 @@ export default class PopupWithDelete extends Popup {
 
         this._cardId = cardId;
         this._removeHandler = removeHandler;
-    }
-
-    close() {
-        super.close();
     }
 }
