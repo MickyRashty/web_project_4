@@ -9,15 +9,17 @@ export default class PopupWithForm extends Popup {
         this._form = this._popup.querySelector(".form");
         this._inputs = this._form.querySelectorAll("input");
         this._formValues = {};
+        this._formButton = this._form.querySelector(".form__button");
     }
 
     _onSubmit() {
-        const formButton = this._form.querySelector(".form__button");
-
         this._getInputValues();
-        formButton.textContent = "Saving...";
+        this._formButton.textContent = "Saving...";
 
-        return this._formSubmitHandler(this._formValues);
+        return this._formSubmitHandler(this._formValues)
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     _getInputValues() {
@@ -43,14 +45,10 @@ export default class PopupWithForm extends Popup {
                 .then(() => {
                     this.close();
                 })
+                .finally(() => {
+                    this._formButton.textContent = "Save";
+                })
         });
-    }
-
-    open = () => {
-        const formButton = this._form.querySelector(".form__button");
-        formButton.textContent = "Save";
-        
-        super.open();
     }
 
     close() {
