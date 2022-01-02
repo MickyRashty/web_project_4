@@ -1,7 +1,7 @@
 // Crad class JS code
 
 class Card {
-    constructor({ name, link, owner: { _id: ownerId }, _id }, template, handleCardClick, handleDeleteClick, shouldHideDeleteIcon) {
+    constructor({ name, link, owner: { _id: ownerId }, _id, likes }, template, handleCardClick, handleDeleteClick, shouldHideDeleteIcon) {
         this._name = name;
         this._link = link;
         this._template = template;
@@ -10,6 +10,7 @@ class Card {
         this._shouldHideDeleteIcon = shouldHideDeleteIcon;
         this._owner = ownerId;
         this._id = _id;
+        this._likes = likes;
 
     }
 
@@ -17,10 +18,17 @@ class Card {
         this._card = this._template.cloneNode(true);
         const cardImage = this._card.querySelector(".card__image");
         const cardText = this._card.querySelector(".card__text");
+        const cardLikes = this._card.querySelector(".card__likes-num");
 
         cardText.textContent = this._name;
         cardImage.src = this._link;
         cardImage.alt = this._name;
+        
+        if (this._likes.length > 0) {
+            cardLikes.textContent = this._likes.length;
+        } else {
+            cardLikes.style.display = "none";
+        }
 
         return this._card;
     }
