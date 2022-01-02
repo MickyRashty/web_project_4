@@ -11,7 +11,7 @@ import PopupWithDelete from "../components/PopupWithDelete.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import { headerLogo, profileImage, editProfileInfoButton, addNewCardButton, cardTemplate, settings, editProfileImageButton } from "../utils/constants.js";
+import { headerLogo, editProfileInfoButton, addNewCardButton, cardTemplate, settings, editProfileImageButton } from "../utils/constants.js";
 
 // Class instances
 const popupCardImage = new PopupWithImage(".popup_type_card-picture");
@@ -60,10 +60,15 @@ editProfileImageButton.addEventListener("click", (e) => {
 
 
 // Popup-forms
-async function handleEditFormSubmit(inputValues) {
+function handleEditFormSubmit(inputValues) {
     const { name, about } = inputValues;
-    const profileData = await api.editUserInfo(name, about);
-    profileUserInfo.setUserInfo(profileData);
+    
+    return api.editUserInfo(name, about)
+        .then((profileData) => {
+            if (profileData){
+                profileUserInfo.setUserInfo(profileData);
+            }   
+        });
 };
 
 async function handleAddFormSubmit(inputValues) {
@@ -78,7 +83,10 @@ async function handleAddFormSubmit(inputValues) {
 async function handleChangeFormSubmit(inputValues) {
     const { avatar } = inputValues;
     const profileImage = await api.editProfileImage(avatar);
-    profileUserInfo.setAvatarLink(profileImage);
+
+    if (profileImage) {
+        profileUserInfo.setAvatarLink(profileImage);
+    }
 }
 
 // Popup-Card Delete
@@ -96,9 +104,21 @@ popupAddCard.setEventListeners();
 popupDeleteButton.setEventListeners();
 popupChangePicture.setEventListeners();
 
+const likesHandlers = {
+    add: api.addLike.bind(api),
+    delete: api.deleteLike.bind(api),
+    isUserInfoLike,
+};
+
+function isUserInfoLike(likesList) {
+    const { id } = profileUserInfo.getUserInfo();
+
+    return likesList.some(({ _id }) => _id === id);
+}
+
 // Create Card - Add Card Popup
 function createCardElement(item) {
-    const card = new Card(item, cardTemplate, popupCardImage.open, popupDeleteButton.open, shouldHideDeleteIcon);
+    const card = new Card(item, cardTemplate, popupCardImage.open, popupDeleteButton.open, shouldHideDeleteIcon, likesHandlers);
 
     return card.createCard();
 }
@@ -110,9 +130,11 @@ async function init() {
         api.getUserInfo()
     ]);
 
-    profileUserInfo.setUserInfo(userInfo);
-    cardsSection.setItems(cards);
-    cardsSection.renderer();
+    if (userInfo && cards) {
+        profileUserInfo.setUserInfo(userInfo);
+        cardsSection.setItems(cards);
+        cardsSection.renderer();
+    }
 }
 
 init();

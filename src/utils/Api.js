@@ -109,4 +109,34 @@ export default class Api {
       console.log("Somthing went wrong", response.status, response.statusText)
     }
   }
+
+  async addLike(cardId) {
+    const response = await fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: {
+        authorization: this._token,
+      },
+    });
+
+    if (response.ok) {
+      return response.json();
+    } else {
+      console.log("Somthing went wrong", response.status, response.statusText)
+    }
+  }
+
+  async deleteLike(cardId) {
+    const response = await fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+    });
+
+    if (response.ok) {
+      return response.json();
+    } else {
+      console.log("Somthing went wrong", response.status, response.statusText)
+    }
+  }
 }

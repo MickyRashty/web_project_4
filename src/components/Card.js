@@ -1,7 +1,7 @@
 // Crad class JS code
 
 class Card {
-    constructor({ name, link, owner: { _id: ownerId }, _id, likes }, template, handleCardClick, handleDeleteClick, shouldHideDeleteIcon) {
+    constructor({ name, link, owner: { _id: ownerId }, _id, likes }, template, handleCardClick, handleDeleteClick, shouldHideDeleteIcon, likesHandlers) {
         this._name = name;
         this._link = link;
         this._template = template;
@@ -11,24 +11,37 @@ class Card {
         this._owner = ownerId;
         this._id = _id;
         this._likes = likes;
+        this._likesHandlers = likesHandlers;
+    }
 
+    _shouldShowLikes() {
+        const cardLikes = this._card.querySelector(".card__likes-num");
+        const likeButton = this._card.querySelector(".card__like-button");
+
+        if (this._likes.length > 0) {
+            cardLikes.textContent = this._likes.length;
+            cardLikes.style.display = "block";
+        } else {
+            cardLikes.style.display = "none";
+        }
+
+        if (this._likesHandlers.isUserInfoLike(this._likes)) {
+            likeButton.classList.add("card__like-button-full");
+        } else {
+            likeButton.classList.remove("card__like-button-full");
+        }
     }
 
     _createClone() {
         this._card = this._template.cloneNode(true);
         const cardImage = this._card.querySelector(".card__image");
         const cardText = this._card.querySelector(".card__text");
-        const cardLikes = this._card.querySelector(".card__likes-num");
 
         cardText.textContent = this._name;
         cardImage.src = this._link;
         cardImage.alt = this._name;
         
-        if (this._likes.length > 0) {
-            cardLikes.textContent = this._likes.length;
-        } else {
-            cardLikes.style.display = "none";
-        }
+        this._shouldShowLikes();
 
         return this._card;
     }
@@ -55,9 +68,29 @@ class Card {
         }
     }
 
+    async _onLikeClick() {
+        const likeButton = this._card.querySelector(".card__like-button");
+        let updatedCard = {};
+
+        if (likeButton.classList.contains("card__like-button-full")) {
+            updatedCard = await this._likesHandlers.delete(this._id);
+        } else {
+            updatedCard = await this._likesHandlers.add(this._id);
+        }
+
+        if (updatedCard) {
+            const { likes } = updatedCard;
+            this._likes = likes;
+
+            this._shouldShowLikes();
+        }
+    }
+
     _addLikeButtonListener() {
         const likeButton = this._card.querySelector(".card__like-button");
-        likeButton.addEventListener("click", () => { likeButton.classList.toggle("card__like-button-full") });
+        likeButton.addEventListener("click", () => {
+            this._onLikeClick();
+        });
     }
 
     _onCardClick() {
