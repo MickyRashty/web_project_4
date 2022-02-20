@@ -1,7 +1,7 @@
 // index JS file
 
 import "regenerator-runtime/runtime";
-import { Card } from "../components/Card.js";
+import Card from "../components/Card.js";
 import "./index.css";
 import Api from "../utils/Api.js";
 import headerLogoSrc from "../images/logo-vector.svg";
@@ -35,10 +35,11 @@ const enableValidation = (settings) => {
     });
 };
 
-const headers = {
+const headers = { //API personal key
     authorization: "d32f6df6-a478-44c7-98e2-39f20efb7fb4",
     "Content-Type": "application/json"
 };
+
 const api = new Api({
     baseUrl: "https://around.nomoreparties.co/v1/group-12",
     headers,
@@ -65,7 +66,7 @@ addNewCardButton.addEventListener("click", (e) => {
 });
 
 editProfileImageButton.addEventListener("click", (e) => {
-    const { avatar } = profileUserInfo.getUserInfo();
+    // const { avatar } = profileUserInfo.getUserInfo();
 
     formValidators[ popupChangePicture.getForm().getAttribute('name') ].resetValidation();
     popupChangePicture.open();
