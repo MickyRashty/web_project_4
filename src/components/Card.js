@@ -1,6 +1,6 @@
 // Crad class JS code
 
-class Card {
+export default class Card {
     constructor({ name, link, owner: { _id: ownerId }, _id, likes }, template, handleCardClick, handleDeleteClick, shouldHideDeleteIcon, likesHandlers) {
         this._name = name;
         this._link = link;
@@ -117,5 +117,3 @@ class Card {
         return this._card;
     }
 }
-
-export { Card };

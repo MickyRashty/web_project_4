@@ -5,7 +5,7 @@
 
 #### Project Description
 
-This project is the first project of the Basic JavaScript course at Practicum100. 
+This project is a continuous project started from Basic JS module, through Applied JS module and then to React.
 I built a *single web-page* that contains a profile info (incl. picture, name & about sections), Edit & Add buttons, and image grid.
 In this project I used different technologies and for the first time used JavaScript to control elements behaviour. 
 
